@@ -1,14 +1,14 @@
 const Order = require("../models/orderModel");
 const { sendMessage } = require("../config/rabbitmq");
-const elasticsearch = require("elasticsearch");
+const { Client } = require('@elastic/elasticsearch');
 const ProductCache = require("../models/productCacheModel");
 
 
 // Set up Elasticsearch client
-const esClient = new elasticsearch.Client({
-  node: process.env.ELASTICSEARCH_URI, // Your remote Elasticsearch URL
+const esClient = new Client({
+  node: process.env.ELASTICSEARCH_URI, 
   auth: {
-    apiKey: process.env.ELASTICSEARCH_API_KEY // Your API key from Elastic Cloud
+    apiKey: process.env.ELASTICSEARCH_API_KEY 
   }
 });
 

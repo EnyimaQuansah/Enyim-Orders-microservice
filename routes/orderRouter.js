@@ -15,22 +15,22 @@ const validateRole = require('../middleware/validateRole');
 
 
 // Create an order
-router.post('/', authenticateToken, validateRole(['USER']), createOrder);
+router.post('/', authenticateToken, validateRole(['USER','SHOP_OWNER','ADMIN']), createOrder);
 
 // Get all orders for the user
-router.get('/', authenticateToken, validateRole(['USER']), getOrders);
+router.get('/', authenticateToken, validateRole(['USER','SHOP_OWNER','ADMIN']), getOrders);
 
 // Get all orders (Admin only)
 router.get('/all', authenticateToken, validateRole(['SHOP_OWNER','ADMIN']), getAllOrders);
 
 // Get an order by ID
-router.get('/:id', authenticateToken, validateRole(['USER']), getOrderById);
+router.get('/:id', authenticateToken, validateRole(['USER','SHOP_OWNER','ADMIN']), getOrderById);
 
 // Update an order (for Users)
-router.put('/:id', authenticateToken, validateRole(['USER']), updateOrder);
+router.put('/:id', authenticateToken, validateRole(['USER','SHOP_OWNER','ADMIN']), updateOrder);
 
 // Delete an order (for Users)
-router.delete('/:id', authenticateToken, validateRole(['USER']), deleteOrder);
+router.delete('/:id', authenticateToken, validateRole(['USER','SHOP_OWNER','ADMIN']), deleteOrder);
 
 
 // Update order status (Admin only)

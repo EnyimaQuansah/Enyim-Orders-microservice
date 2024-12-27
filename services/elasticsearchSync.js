@@ -4,9 +4,9 @@ const ProductCache = require('../models/productCacheModel'); // Updated schema
 
 // Initialize the Elasticsearch client with the remote URL and API key
 const esClient = new Client({
-  node: process.env.ELASTICSEARCH_URI, // Your remote Elasticsearch URL
+  node: process.env.ELASTICSEARCH_URI, 
   auth: {
-    apiKey: process.env.ELASTICSEARCH_API_KEY // Your API key from Elastic Cloud
+    apiKey: process.env.ELASTICSEARCH_API_KEY 
   }
 });
 

@@ -1,4 +1,5 @@
-// orders microservice server.js
+// app.js
+
 require('dotenv').config();
 const express = require("express");
 const { connectRabbitMQ } = require("./config/rabbitmq");
@@ -10,28 +11,24 @@ const syncProductCache = require("./services/productCacheSyncService");
 const { initializeAndSyncProducts } = require('./services/elasticsearchSync');
 const imageRouter = require('./routes/imageRoutes');
 
-
 const app = express();
 app.use(express.json());
 
-
-
 (async () => {
   try {
-
     // Connect to the main Order DB
-    connectOrderDB();
-	
-	// Start ProductCache Sync Service
+    await connectOrderDB();
+
+    // Start ProductCache Sync Service
     await syncProductCache();
 
     await connectRabbitMQ();
     // await consumeProductEvents();
-	
 
-	initializeAndSyncProducts().catch((error) => {
-	  console.error('Failed to initialize and sync:', error);
-	});
+    // Initialize and sync Elasticsearch
+    await initializeAndSyncProducts().catch((error) => {
+      console.error('Failed to initialize and sync Elasticsearch:', error);
+    });
 
   } catch (err) {
     console.error("Failed to start server:", err.message);

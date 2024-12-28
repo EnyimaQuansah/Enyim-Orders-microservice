@@ -144,6 +144,8 @@ const startProductChangeStream = async () => {
   });
 };
 
+
+
 // Search products in Elasticsearch
 const searchProducts = async (query) => {
   try {
@@ -222,5 +224,7 @@ const initializeAndSyncProducts = async () => {
 
 module.exports = {
   initializeAndSyncProducts,
+  esClient,
   searchProducts,
+  bootstrapElasticsearchIndex,
 };

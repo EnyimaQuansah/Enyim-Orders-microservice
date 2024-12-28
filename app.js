@@ -1,5 +1,4 @@
 // app.js
-
 require('dotenv').config();
 const express = require("express");
 const { connectRabbitMQ } = require("./config/rabbitmq");
@@ -14,6 +13,7 @@ const imageRouter = require('./routes/imageRoutes');
 const app = express();
 app.use(express.json());
 
+
 (async () => {
   try {
     // Connect to the main Order DB
@@ -23,7 +23,6 @@ app.use(express.json());
     await syncProductCache();
 
     await connectRabbitMQ();
-    // await consumeProductEvents();
 
     // Initialize and sync Elasticsearch
     await initializeAndSyncProducts().catch((error) => {
@@ -35,6 +34,7 @@ app.use(express.json());
     process.exit(1);
   }
 })();
+
 
 // Routes
 app.use("/orders", orderRouter);

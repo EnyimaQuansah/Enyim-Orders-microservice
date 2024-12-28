@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const ProductCache = require('../models/productCacheModel'); // ProductCache model in the orders microservice
-const { bootstrapElasticsearchIndex, esClient } = require('./elasticSearchSync'); 
+const { bootstrapElasticsearchIndex, esClient } = require('./elasticsearchSync'); 
 require('dotenv').config();
 
 let retryQueue = []; // Temporary queue for failed operations

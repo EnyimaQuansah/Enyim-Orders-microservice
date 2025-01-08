@@ -41,4 +41,9 @@ app.use("/orders", orderRouter);
 app.use("/products", productRouter);
 app.use('/images', imageRouter);
 
+// Alive check route
+app.get('/activate', (req, res) => {
+  res.status(200).json({ message: 'Orders service is active' });
+});
+
 module.exports = app;
